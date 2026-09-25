@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Gym Fitness - Admin Dashboard</title>
+{% load static %}
+
+    <style>    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'gym.png' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: scroll;
+            min-height: 100vh;
+        }
+        
+        
+        /* SIDEBAR */
+        
+        .sidebar {
+            position: fixed;
+            width: 240px;
+            height: 100vh;
+            padding: 25px 15px;
+        }
+        
+        .sidebar h2 {
+            background:linear-gradient(red,black,red,black,red,black) ;
+            color: white;
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: xx-large;
+        }
+        
+        .sidebar a {
+            display: block;
+            color: #d1d5db;
+            text-decoration: none;
+            padding: 14px 18px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+        
+        .sidebar a:hover {
+            background: #e21212;
+            color: rgb(8, 8, 8);
+        }
+        
+        
+        /* MAIN */
+        
+        .main {
+            margin-left: 240px;
+            padding: 30px;
+        }
+        
+        
+        /* HEADER */
+        
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .header h1 {
+            color: #111827;
+        }
+        
+        .header p {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+        
+        
+        /* CARDS */
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .card h3 {
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        
+        .card h1 {
+            font-size: 35px;
+            color: #4b4a4a;
+            margin-bottom: 15px;
+        }
+        
+        .card a {
+            text-decoration: none;
+            color: #eb2525;
+        }
+        .card a:hover{
+            color: #000000;
+        }
+        
+        
+        /* WELCOME */
+        
+        .welcome {
+            margin-top: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .welcome h2 {
+            margin-bottom: 10px;
+        }
+        
+        .welcome p {
+            color: #050505;
+            margin-bottom: 25px;
+        }
+        
+        
+        /* BUTTONS */
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .buttons a {
+            background: #e21212;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 7px;
+        }
+        
+        .buttons a:hover {
+            background: #000000;
+        }
+        
+        
+        /* RESPONSIVE */
+        
+        @media (max-width: 900px) {
+        
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        
+        }
+        
+        @media (max-width: 600px) {
+        
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+        
+            .main {
+                margin-left: 0;
+            }
+        
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>TiTaN FiT</h2>
+
+    <a href="/admin-dashboard/">Dashboard</a>
+
+    <a href="/admin/gym/trainer/">Trainers</a>
+
+    <a href="/admin/gym/member/">Users</a>
+
+    <a href="/admin/gym/workout/">Workouts</a>
+
+    <a href="/admin/gym/diet/">Diets</a>
+
+    <a href="/admin/">Django Admin</a>
+
+    <a href="{% url 'admin_logout' %}" class="logout-btn">
+        Logout
+    </a>
+</div>
+
+
+<div class="main">
+    <div class="header">
+        <h1>Admin Dashboard</h1>
+        <p>Gym Fitness Management System</p>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+
+            <h3>Trainers</h3>
+
+            <h1>{{ trainer_count }}</h1>
+
+            <a href="/admin/gym/trainer/">
+                Manage Trainers
+            </a>
+        </div>
+
+
+        <div class="card">
+
+            <h3>Users</h3>
+
+            <h1>{{ member_count }}</h1>
+
+            <a href="/admin/gym/member/">
+                Manage Users
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Workouts</h3>
+
+            <h1>{{ workout_count }}</h1>
+
+            <a href="/admin/gym/workout/">
+                Manage Workouts
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Diets</h3>
+
+            <h1>{{ diet_count }}</h1>
+
+            <a href="/admin/gym/diet/">
+                Manage Diets
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="welcome">
+
+        <h2>Admin Management</h2>
+
+        <p>
+            Admin can manage trainers, users, workouts
+            and diet information from this system.
+        </p>
+
+        <div class="buttons">
+
+            <a href="/admin/gym/trainer/">
+                Manage Trainers
+            </a>
+
+            <a href="/admin/gym/member/">
+                Manage Users
+            </a>
+
+            <a href="/admin/gym/workout/">
+                Manage Workouts
+            </a>
+
+            <a href="/admin/gym/diet/">
+                Manage Diets
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

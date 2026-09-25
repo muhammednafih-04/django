@@ -1,0 +1,289 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Trainer Dashboard</title>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("{% static 'gym.png' %}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    width: 240px;
+    height: 100vh;
+    padding: 25px 15px;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: xx-large;
+}
+
+.sidebar a {
+    font-size: large;
+    display: block;
+    color: #07dbf7;
+    text-decoration: none;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.sidebar a:hover {
+    background: #f12f0d;
+    color: rgb(19, 18, 18);
+}
+
+
+/* MAIN */
+
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+
+/* HEADER */
+
+.header {
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    color: #f70a59;
+}
+
+.header p {
+    color: #da1255;
+    margin-top: 6px;
+}
+
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    color: #0e0e0e;
+    margin-bottom: 10px;
+}
+
+.card h1 {
+    font-size: 35px;
+    margin-bottom: 15px;
+    color: #e91b1b;
+}
+
+.card a {
+    text-decoration: none;
+    color: #dd114e;
+}
+.card a:hover{
+    color: #0e0e0e;
+}
+
+
+/* SECTION */
+
+.section {
+    background: white;
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+}
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.buttons a {
+    background: #ee0437;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 7px;
+}
+
+.buttons a:hover {
+    background: #0f0f0f;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width: 800px) {
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>TiTaN FiT</h2>
+
+    <a href="/trainer-dashboard/">
+        Dashboard
+    </a>
+
+    <a href="/api/members/">
+        Users
+    </a>
+
+    <a href="/api/workouts/">
+        Workouts
+    </a>
+
+    <a href="/api/diets/">
+        Diets
+    </a>
+
+    <a href="/admin/">
+        Admin
+    </a>
+    <a href="/trainer-logout/">
+        Logout
+    </a>
+
+</div>
+
+
+<div class="main">
+
+    <div class="header">
+
+        <h1>Trainer Dashboard</h1>
+
+        <p>Manage your users, workouts and diets</p>
+
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>My Users</h3>
+
+            <h1>{{ member_count }}</h1>
+
+            <a href="/api/members/">
+                View Users
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Workouts</h3>
+
+            <h1>{{ workout_count }}</h1>
+
+            <a href="/api/workouts/">
+                View Workouts
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Diets</h3>
+
+            <h1>{{ diet_count }}</h1>
+
+            <a href="/api/diets/">
+                View Diets
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>Trainer Actions</h2>
+
+        <div class="buttons">
+
+            <a href="/api/members/">
+                View Users
+            </a>
+
+            <a href="/api/workouts/">
+                Manage Workouts
+            </a>
+
+            <a href="/api/diets/">
+                Manage Diets
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

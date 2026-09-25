@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>User Dashboard</title>
+{% load static %}
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'gym.png' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: scroll;
+            min-height: 100vh;
+        }
+        body h1{
+            text-align: center;
+
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #111827;
+        }
+
+        .header p {
+            color: #e66262;
+            margin-top: 5px;
+        }
+        .trainer-info {
+         margin-top: 10px;
+         color: #df474e;
+        font-size: 16px;
+    }
+
+   .trainer-info strong {
+    color: #111827;
+    }
+
+        .logout {
+            background: #dc2626;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .logout:hover {
+            background: #0a0a0a;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #e41919;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f3f4f6;
+        }
+
+        .empty {
+            color: #6b7280;
+            padding: 15px 0;
+        }
+
+    </style>
+</head>
+
+<body><br>
+    <h1 style="color: aliceblue;">TiTaN FiT</h1><br><br>
+
+<div class="container">
+
+    <div class="header">
+
+        <div>
+
+            <h1>User Dashboard</h1>
+
+            <p>
+                Welcome, {{ request.user.username }}
+            </p>
+            <p class="trainer-info">
+                Your Trainer:
+                <strong>{{ trainer.name }}</strong>
+            </p>
+    
+        </div>
+
+        <a
+            href="{% url 'user_logout' %}"
+            class="logout">
+
+            Logout
+
+        </a>
+
+    </div>
+
+    <!-- WORKOUTS -->
+    <div class="section">
+
+        <h2>My Workouts</h2>
+
+        {% if workouts %}
+
+        <table>
+
+            <tr>
+
+                <th>Exercise</th>
+                <th>Sets</th>
+                <th>Repetitions</th>
+                <th>Duration</th>
+                <th>Date</th>>
+            </tr>
+
+            {% for workout in workouts %}
+
+            <tr>
+
+                <td>
+                    {{ workout.exercise_name }}
+                </td>
+    
+                <td>
+                    {{ workout.sets }}
+                </td>
+    
+                <td>
+                    {{ workout.repetitions }}
+                </td>
+    
+                <td>
+                    {{ workout.duration }}
+                </td>
+    
+                <td>
+                    {{ workout.date }}
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <p class="empty">
+            No workouts assigned yet.
+        </p>
+
+        {% endif %}
+    </div>
+
+
+    <!-- DIETS -->
+
+    <div class="section">
+
+        <h2>My Diet Plan</h2>
+
+        {% if diets %}
+
+        <table>
+            <tr>
+                <th>Meal</th>
+                <th>Food Items</th>
+                <th>Calories</th>
+                <th>Date</th>>
+            </tr>
+
+            {% for diet in diets %}
+
+            <tr>
+                <td>
+                    {{ diet.meal_name }}
+                </td>
+    
+                <td>
+                    {{ diet.food_items }}
+                </td>
+    
+                <td>
+                    {{ diet.calories }}
+                </td>
+    
+                <td>
+                    {{ diet.date }}
+                </td>
+    
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% else %}
+
+        <p class="empty">
+            No diet plan assigned yet.
+        </p>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>
