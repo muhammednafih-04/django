@@ -32,7 +32,6 @@ class Member(models.Model):
     def __str__(self):
         return self.user.username
 
-
 class Workout(models.Model):
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
@@ -44,7 +43,6 @@ class Workout(models.Model):
 
     def __str__(self):
         return self.exercise_name
-
 
 class Diet(models.Model):
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)

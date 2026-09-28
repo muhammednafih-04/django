@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-
 from .models import Trainer, Member, Workout, Diet
 from .serializers import (
     TrainerSerializer,
@@ -12,11 +11,9 @@ from .serializers import (
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-
 # -------------------------
 # ADMIN DASHBOARD
 # -------------------------
-
 def admin_dashboard(request):
     trainer_count = Trainer.objects.count()
     member_count = Member.objects.count()
@@ -35,12 +32,9 @@ def admin_dashboard(request):
         'gym/admin_dashboard.html',
         context
     )
-
-
 # -------------------------
 # TRAINER API
 # -------------------------
-
 class TrainerViewSet(viewsets.ModelViewSet):
     queryset = Trainer.objects.all()
     serializer_class = TrainerSerializer
@@ -127,7 +121,6 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 # -------------------------
 # DIET API
 # -------------------------
-
 class DietViewSet(viewsets.ModelViewSet):
     serializer_class = DietSerializer
     permission_classes = [IsAuthenticated]
