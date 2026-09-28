@@ -2,13 +2,184 @@
 <html>
     {% load static %}
 <head>
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-
-    <title>Gym Fitness - Admin Dashboard</title>
-     
-    
+   
+    <title>Gym Fitness - Admin Dashboard</title> 
 </head>
+<style>    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("{% static 'gym.png' %}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+    min-height: 100vh;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    background-color:white;
+    position: fixed;
+    width: 240px;
+    height: 100vh;
+    padding: 25px 15px;
+}
+
+.sidebar h1 {
+    color: rgb(221, 32, 32);
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: xx-large;
+}
+
+.sidebar a {
+    display: block;
+    color: #1768e2;
+    text-decoration: none;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.sidebar a:hover {
+    background: #e21212;
+    color: rgb(0, 0, 0);
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+/* HEADER */
+
+.header {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    color: #111827;
+}
+
+.header p {
+    color: #6b7280;
+    margin-top: 5px;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.card h1 {
+    font-size: 35px;
+    color: #4b4a4a;
+    margin-bottom: 15px;
+}
+
+.card a {
+    text-decoration: none;
+    color: #eb2525;
+}
+.card a:hover{
+    color: #000000;
+}
+
+
+/* WELCOME */
+
+.welcome {
+    margin-top: 30px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.welcome h2 {
+    margin-bottom: 10px;
+}
+  
+.welcome p {
+    color: #050505;
+    margin-bottom: 25px;
+}
+
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.buttons a {
+    background: #e21212;
+    color: white;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+}
+
+.buttons a:hover {
+    background: #000000;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+}
+</style>
 <body>
     <nav class="navbar">
 
