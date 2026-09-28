@@ -4,6 +4,7 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 
     <title>Trainer Dashboard</title>
 <style>
@@ -156,7 +157,6 @@ body {
     .cards {
         grid-template-columns: 1fr;
     }
-
 }
 
 @media(max-width: 600px) {
@@ -179,25 +179,15 @@ body {
 
     <h2>TiTaN FiT</h2>
 
-    <a href="/trainer-dashboard/">
-        Dashboard
-    </a>
+    <a href="{% url 'trainer_dash' %}">Dashboard</a>
 
-    <a href="/api/members/">
-        Users
-    </a>
+    <a href="/api/members/">Users</a>
 
-    <a href="/api/workouts/">
-        Workouts
-    </a>
+    <a href="/api/workouts/">Workouts</a>
 
-    <a href="/api/diets/">
-        Diets
-    </a>
+    <a href="/api/diets/">Diets</a>
 
-    <a href="/admin/">
-        Admin
-    </a>
+    <a href="/admin/">Admin</a>
 
     <a href="/trainer-logout/">
         Logout
@@ -207,12 +197,9 @@ body {
 
 <div class="main">
 
-    <div class="header">
-
-        <h1>Trainer Dashboard</h1>
-
-        <p>Manage your users, workouts and diets</p>
-
+    <div class="welcome">
+        <h1>Welcome, <span>Trainer</span></h1>
+        <p>Manage your members, workouts and diet plans.</p>
     </div>
 
     <div class="cards">
@@ -250,9 +237,7 @@ body {
             <a href="/api/diets/">
                 View Diets
             </a>
-
         </div>
-
     </div>
 
     <div class="section">
@@ -273,6 +258,7 @@ body {
                 Manage Diets
             </a>
       </div>
+</div>
 </div>
 </div>
 

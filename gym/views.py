@@ -404,3 +404,5 @@ def user_logout(request):
     logout(request)
     return redirect('user_login')
 
+def home(request):
+    return render(request,'gym/home.html')

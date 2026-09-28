@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TiTaN FiT - Gym & Fitness</title>
+{% load static %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url("{% static 'gym.png' %}");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: white;
+        }
+
+        .navbar {
+            width: 100%;
+            padding: 20px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(0,0,0,0.75);
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #ff3b30;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        .nav-link:hover {
+            color: #ff3b30;
+        }
+
+        .hero {
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #ff3b30;
+        }
+
+        .hero h2 {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            font-size: 17px;
+            line-height: 1.7;
+            color: #eeeeee;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 15px 35px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .admin {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .trainer {
+            background: #ffffff;
+            color: #111111;
+        }
+
+        .user {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 55px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .feature p {
+            font-size: 13px;
+            color: #cccccc;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-link {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            TITAN<span> FiT</span>
+        </div>
+
+        <div>
+            <a href="{% url 'admin_login' %}" class="nav-link">
+                Admin
+            </a>
+
+            <a href="{% url 'trainer_login' %}" class="nav-link">
+                Trainer
+            </a>
+
+            <a href="{% url 'user_login' %}" class="nav-link">
+                User
+            </a>
+        </div>
+
+    </nav>
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <h1>
+            TITAN<span> FiT</span>
+        </h1>
+
+        <h2>
+            GYM & FITNESS MANAGEMENT SYSTEM
+        </h2>
+
+        <p>
+            Manage workouts, diets, trainers and members
+            in one simple fitness management platform.
+        </p>
+
+        <!-- LOGIN BUTTONS -->
+        <div class="buttons">
+
+            <a href="{% url 'admin_login' %}" class="btn admin">
+                Admin Login
+            </a>
+
+            <a href="{% url 'trainer_login' %}" class="btn trainer">
+                Trainer Login
+            </a>
+
+            <a href="{% url 'user_login' %}" class="btn user">
+                User Login
+            </a>
+
+        </div>
+
+        <!-- FEATURES -->
+        <div class="features">
+
+            <div class="feature">
+                <h3>Workouts</h3>
+                <p>Manage exercise plans</p>
+            </div>
+
+            <div class="feature">
+                <h3>Diet</h3>
+                <p>Manage nutrition plans</p>
+            </div>
+
+            <div class="feature">
+                <h3>Trainers</h3>
+                <p>Connect trainers and users</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

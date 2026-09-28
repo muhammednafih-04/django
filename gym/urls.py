@@ -12,6 +12,8 @@ router.register('diets',views.DietViewSet,basename='diets')
 
 
 urlpatterns = [
+    path('',views.home,name='home'),
+    
     path('admin_dashboard/',views.admin_dashboard,name='admin_dashboard'),
 
     path('trainer_dash/',views.trainer_dashboard,name='trainer_dash'),
