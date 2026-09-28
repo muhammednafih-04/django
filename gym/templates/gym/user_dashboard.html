@@ -54,6 +54,9 @@
          color: #df474e;
         font-size: 16px;
     }
+    .header strong{
+        color: #0a0a0a;
+    }
 
    .trainer-info strong {
     color: #111827;
@@ -124,7 +127,7 @@
             <h1>User Dashboard</h1>
 
             <p>
-                Welcome, {{ request.user.username }}
+                Welcome,<strong> {{ request.user.username }}</strong> 
             </p>
             <p class="trainer-info">
                 Your Trainer:
@@ -136,11 +139,8 @@
         <a
             href="{% url 'user_logout' %}"
             class="logout">
-
             Logout
-
-        </a>
-
+    </a>
     </div>
 
     <!-- WORKOUTS -->
