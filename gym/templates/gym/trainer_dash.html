@@ -41,7 +41,9 @@ body {
     height: 100vh;
     padding: 25px 15px;
 }
-
+.sidebar span{
+    color: #0e0e0e;
+}
 .sidebar h2 {
     color: rgb(255, 1, 1);
     text-align: center;
@@ -194,7 +196,7 @@ body {
 <body>
 <div class="sidebar">
     <img src="{% static 'titan_fit.png' %}" class="gym-logo">
-    <h2>TiTaN FiT</h2>
+    <h2>TITAN <span>FiT</span></h2>
 
     <a href="{% url 'trainer_dash' %}">Dashboard</a>
 
@@ -203,8 +205,6 @@ body {
     <a href="/api/workouts/">Workouts</a>
 
     <a href="/api/diets/">Diets</a>
-
-    <a href="/admin/">Admin</a>
 
     <a href="/trainer-logout/">
         Logout
