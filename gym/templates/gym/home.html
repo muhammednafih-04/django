@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>TiTaN FiT - Gym & Fitness</title>
-{% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'titan_fit.png'%}">
+
     <style>
         * {
             margin: 0;
@@ -43,6 +45,12 @@
             font-weight: bold;
             letter-spacing: 2px;
         }
+        .logo .gym-logo{
+            display: block;
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+        }
 
         .logo span {
             color: #ff3b30;
@@ -61,14 +69,12 @@
 
         .hero {
             min-height: calc(100vh - 80px);
-
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-
             text-align: center;
-            padding: 40px 20px;
+            padding: 10px 10px;
         }
 
         .hero h1 {
@@ -187,7 +193,7 @@
     <nav class="navbar">
 
         <div class="logo">
-            TITAN<span> FiT</span>
+            <img src="{% static 'titan_fit.png' %}" class="gym-logo">
         </div>
 
         <div>
@@ -207,9 +213,7 @@
     </nav>
     <!-- HERO SECTION -->
     <section class="hero">
-
-        <h1>
-            TITAN<span> FiT</span>
+        <h1>TITAN<span> FiT</span>
         </h1>
 
         <h2>
