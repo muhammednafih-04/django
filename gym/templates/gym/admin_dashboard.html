@@ -37,6 +37,12 @@ body {
     margin-bottom: 35px;
     font-size: xx-large;
 }
+.sidebar .gym-logo{
+    display: flex;
+    height: 100px;
+    width: 100px;
+    
+}
 
 .sidebar a {
     display: block;
@@ -181,28 +187,10 @@ body {
 }
 </style>
 <body>
-    <nav class="navbar">
-
-        <div class="logo">
-            TITAN<span> FiT</span>
-        </div>
-    
-        <div class="nav-links">
-            <a href="{% url 'admin_dashboard' %}">Dashboard</a>
-            <a href="#">Trainers</a>
-            <a href="#">Users</a>
-            <a href="#">Workouts</a>
-            <a href="#">Diets</a>
-            <a href="{% url 'admin_logout' %}" class="logout">
-                Logout
-            </a>
-        </div>
-    
-    </nav>
-
+   
 <div class="sidebar">
 
-    <h1>TiTaN FiT</h1>
+    <h1><img src="{% static 'titan_fit.png' %}" class="gym-logo">TiTaN FiT</h1>
 
     <a href="{% url 'admin_dashboard' %}">Dashboard</a>
 

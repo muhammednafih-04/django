@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-   
+    {% load static %}
     <title>User Dashboard</title>
-{% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'titan_fit.png'%}">
+
     <style>
 
         * {
@@ -29,6 +30,15 @@
             max-width: 1100px;
             margin: auto;
         }
+        .container .gym-logo{
+            display:inline;   
+            height: 150px;
+            width: 150px;
+            object-fit: contain;
+        }
+        .container h1{
+            color: white;
+        }
 
         .header {
             background: white;
@@ -45,12 +55,12 @@
         }
 
         .header p {
-            color: #e66262;
+            color: #ff0000;
             margin-top: 5px;
         }
         .trainer-info {
          margin-top: 10px;
-         color: #df474e;
+         color: #ff000d;
         font-size: 16px;
     }
     .header strong{
@@ -115,12 +125,11 @@
 </head>
 
 <body><br>
-    <h1 style="color: aliceblue;">TiTaN FiT</h1>
 
 <div class="container">
-
-    <div class="header">
-
+    <h1><img src="{% static 'titan_fit.png' %}" class="gym-logo" class="gym-logo"><p>TITAN FiT</h1>
+    <br>
+    <div class="header"> 
         <div>
 
             <h1>User Dashboard</h1>
