@@ -18,6 +18,8 @@ urlpatterns = [
 
     path('trainer_dash/',views.trainer_dashboard,name='trainer_dash'),
 
+    path('user-dashboard/',views.user_dashboard,name='user_dashboard'),
+
     path('api/',include(router.urls)),
 
     path(
@@ -44,11 +46,6 @@ urlpatterns = [
     'user-login/',
     views.user_login,
     name='user_login'
-),
-    path(
-    'user-dashboard/',
-    views.user_dashboard,
-    name='user_dashboard'
 ),
     path(
     'user-logout/',
