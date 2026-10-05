@@ -43,7 +43,6 @@ class TrainerViewSet(viewsets.ModelViewSet):
 # -------------------------
 # MEMBER API
 # -------------------------
-
 class MemberViewSet(viewsets.ModelViewSet):
     serializer_class = MemberSerializer
     permission_classes = [IsAuthenticated]
@@ -73,11 +72,9 @@ class MemberViewSet(viewsets.ModelViewSet):
             trainer=trainer
         )
 
-
 # -------------------------
 # WORKOUT API
 # -------------------------
-
 class WorkoutViewSet(viewsets.ModelViewSet):
     serializer_class = WorkoutSerializer
     permission_classes = [IsAuthenticated]
@@ -200,7 +197,6 @@ def admin_login(request):
 
 @login_required(login_url='admin_login')
 def admin_dashboard(request):
-
     if not request.user.is_staff:
         return redirect('admin_login')
 
@@ -258,9 +254,7 @@ def trainer_dashboard(request):
     )
 
 def trainer_login(request):
-
     if request.method == 'POST':
-
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -355,9 +349,7 @@ def user_login(request):
 
 @login_required(login_url='user_login')
 def user_dashboard(request):
-
     try:
-
         member = Member.objects.get(
             user=request.user
         )
@@ -389,9 +381,7 @@ def user_dashboard(request):
 
         return redirect('user_login')
 
-
 #.......logout......
-
 def trainer_logout(request):
     logout(request)
     return redirect('trainer_login')
