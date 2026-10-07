@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.core.exceptions import ValidationError
 
 class Trainer(models.Model):
     user = models.OneToOneField(
@@ -20,10 +20,8 @@ class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     trainer = models.ForeignKey(
         Trainer,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True
-    )
+        on_delete=models.CASCADE,
+        related_name='members')
     name=models.CharField(max_length=100,default='')
     age = models.IntegerField()
     phone = models.CharField(max_length=15)
@@ -33,16 +31,23 @@ class Member(models.Model):
         return self.user.username
 
 class Workout(models.Model):
-    trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE,related_name='workouts')
+    member = models.ForeignKey(Member, on_delete=models.CASCADE,related_name='workouts')
     exercise_name = models.CharField(max_length=100)
     sets = models.IntegerField()
     repetitions = models.IntegerField()
     duration = models.IntegerField(help_text="Duration in minutes")
     date = models.DateField()
+         
+    def clean(self):
+        if self.trainer_id and self.member_id:
+            if self.trainer_id != self.member.trainer_id:
+                raise ValidationError(
+                    "This member does not belong to the selected trainer."
+                )
 
     def __str__(self):
-        return self.exercise_name
+        return f"{self.member.user.username}-{self.exercise_name}"
 
 class Diet(models.Model):
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
@@ -52,5 +57,11 @@ class Diet(models.Model):
     calories = models.IntegerField()
     date = models.DateField()
 
+    def clean(self):
+        if self.trainer_id and self.member_id:
+            if self.trainer_id != self.member.trainer_id:
+                raise ValidationError(
+                    "This member does not belong to the selected trainer." )
+
     def __str__(self):
-        return self.meal_name
+        return f"{self.member.user.username} - {self.meal_name}"

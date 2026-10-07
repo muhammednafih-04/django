@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Trainer, Member, Workout, Diet
-
+from django.contrib import admin, messages
 
 @admin.register(Trainer)
 class TrainerAdmin(admin.ModelAdmin):
@@ -61,6 +61,13 @@ class WorkoutAdmin(admin.ModelAdmin):
         'exercise_name',
         'member__user__username',
     )
+    def save_model(self, request, obj, form, change):
+        if obj.trainer != obj.member.trainer:
+            messages.warning(request,
+            "Warning: This member does not belong to the selected trainer. Diet was not saved."
+            )
+            return
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(Diet)
@@ -82,3 +89,11 @@ class DietAdmin(admin.ModelAdmin):
         'meal_name',
         'member__user__username',
     )
+
+    def save_model(self, request, obj, form, change):
+        if obj.trainer != obj.member.trainer:
+            messages.warning(request,
+            "Warning: This member does not belong to the selected trainer. Diet was not saved."
+            )
+            return
+        super().save_model(request, obj, form, change)

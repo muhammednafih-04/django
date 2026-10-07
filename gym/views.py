@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 from .models import Trainer, Member, Workout, Diet
 from .serializers import (
     TrainerSerializer,
@@ -11,27 +12,7 @@ from .serializers import (
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-# -------------------------
-# ADMIN DASHBOARD
-# -------------------------
-def admin_dashboard(request):
-    trainer_count = Trainer.objects.count()
-    member_count = Member.objects.count()
-    workout_count = Workout.objects.count()
-    diet_count = Diet.objects.count()
 
-    context = {
-        'trainer_count': trainer_count,
-        'member_count': member_count,
-        'workout_count': workout_count,
-        'diet_count': diet_count,
-    }
-
-    return render(
-        request,
-        'gym/admin_dashboard.html',
-        context
-    )
 # -------------------------
 # TRAINER API
 # -------------------------
@@ -48,7 +29,6 @@ class MemberViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-
         try:
             trainer = Trainer.objects.get(
                 user=self.request.user
@@ -57,20 +37,18 @@ class MemberViewSet(viewsets.ModelViewSet):
             return Member.objects.filter(
                 trainer=trainer
             )
-
         except Trainer.DoesNotExist:
 
             return Member.objects.none()
 
+
     def perform_create(self, serializer):
 
         trainer = Trainer.objects.get(
-            user=self.request.user
-        )
+            user=self.request.user)
 
         serializer.save(
-            trainer=trainer
-        )
+            trainer=trainer)
 
 # -------------------------
 # WORKOUT API
@@ -100,16 +78,34 @@ class WorkoutViewSet(viewsets.ModelViewSet):
             user=self.request.user
         )
 
-        member = serializer.validated_data.get(
-            'member'
+        member = serializer.validated_data['member']
+
+        # IMPORTANT CHANGE
+        if member.trainer != trainer:
+            raise PermissionDenied(
+                "This member belongs to another trainer."
+            )
+
+        serializer.save(
+            trainer=trainer
         )
 
+    # IMPORTANT CHANGE
+    def perform_update(self, serializer):
+
+        trainer = Trainer.objects.get(
+            user=self.request.user
+        )
+
+        member = serializer.validated_data.get(
+            'member',
+            serializer.instance.member
+        )
+
+        # IMPORTANT CHANGE
         if member.trainer != trainer:
-
-            from rest_framework.exceptions import PermissionDenied
-
             raise PermissionDenied(
-                "You can only add workouts for your own users."
+                "This member belongs to another trainer."
             )
 
         serializer.save(
@@ -143,14 +139,9 @@ class DietViewSet(viewsets.ModelViewSet):
             user=self.request.user
         )
 
-        member = serializer.validated_data.get(
-            'member'
-        )
+        member = serializer.validated_data['member']
 
         if member.trainer != trainer:
-
-            from rest_framework.exceptions import PermissionDenied
-
             raise PermissionDenied(
                 "You can only add diets for your own users."
             )
@@ -159,6 +150,26 @@ class DietViewSet(viewsets.ModelViewSet):
             trainer=trainer
         )
 
+    # IMPORTANT CHANGE
+    def perform_update(self, serializer):
+
+        trainer = Trainer.objects.get(
+            user=self.request.user
+        )
+
+        member = serializer.validated_data.get(
+            'member',
+            serializer.instance.member
+        )
+
+        if member.trainer != trainer:
+            raise PermissionDenied(
+                "You can only manage diets for your own users."
+            )
+
+        serializer.save(
+            trainer=trainer
+        )
 #-----login------#
 
 def admin_login(request):
@@ -194,6 +205,10 @@ def admin_login(request):
         request,
         'gym/admin_login.html'
     )
+
+# -------------------------
+# ADMIN DASHBOARD
+# -------------------------
 
 @login_required(login_url='admin_login')
 def admin_dashboard(request):
