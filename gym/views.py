@@ -219,13 +219,31 @@ def admin_dashboard(request):
     member_count = Member.objects.count()
     workout_count = Workout.objects.count()
     diet_count = Diet.objects.count()
+    
+    recent_members = Member.objects.select_related(
+        'user', 'trainer'
+    ).order_by('-id')[:5]
+
+    recent_workouts = Workout.objects.select_related(
+        'member', 'trainer'
+    ).order_by('-id')[:5]
+
+    recent_diets = Diet.objects.select_related(
+        'member', 'trainer'
+    ).order_by('-id')[:5]
+
 
     context = {
         'trainer_count': trainer_count,
         'member_count': member_count,
         'workout_count': workout_count,
         'diet_count': diet_count,
+
+        'recent_members': recent_members,
+        'recent_workouts': recent_workouts,
+        'recent_diets': recent_diets,
     }
+    
 
     return render(
         request,

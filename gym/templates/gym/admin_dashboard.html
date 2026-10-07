@@ -233,7 +233,6 @@ body {
             <h3>Trainers</h3>
 
             <h1>{{ trainer_count }}</h1>
-
             <a href="/admin/gym/trainer/">
                 Manage Trainers
             </a>
@@ -304,5 +303,48 @@ body {
         </div>
     </div>
 </div>
+
+<h2>Recent Workouts</h2>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Member</th>
+            <th>Trainer</th>
+            <th>Sets</th>
+            <th>Repetitions</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for workout in recent_workouts %}
+
+        <tr>
+            <td>{{ workout.exercise_name }}</td>
+            <td>{{ workout.member.user.username }}</td>
+            <td>{{ workout.trainer.name }}</td>
+            <td>{{ workout.sets }}</td>
+            <td>{{ workout.repetitions }}</td>
+            <td>{{ workout.date }}</td>
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="6">No workouts available.</td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
 </body>
 </html>
