@@ -57,6 +57,7 @@
 
         .header h1 {
             color: #0c0d11;
+            text-align: left;
         }
 
         .header h3,p {
@@ -129,15 +130,14 @@
     </style>
 </head>
 
-<body><br>
+<body>
 
 <div class="container">
     <h1><img src="{% static 'titan_fit.png' %}" class="gym-logo"><p>TITAN <span>FiT</span></p></h1>
     <br>
     <div class="header"> 
         <div>
-            <h1>User</h1>
-
+            <h1>Gym Member</h1>
             <p>
                <h3> Welcome,<strong> {{ request.user.username }}</strong></h3>
             </p>
@@ -163,9 +163,7 @@
         {% if workouts %}
 
         <table>
-
             <tr>
-
                 <th>Exercise</th>
                 <th>Sets</th>
                 <th>Repetitions</th>
