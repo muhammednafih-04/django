@@ -12,7 +12,6 @@ from .serializers import (
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-
 # -------------------------
 # TRAINER API
 # -------------------------
@@ -251,7 +250,7 @@ def admin_dashboard(request):
         context
     )
 
-
+#----Trainer Dashboard------
 @login_required(login_url='trainer_login')
 def trainer_dashboard(request):
 
@@ -262,22 +261,35 @@ def trainer_dashboard(request):
         return redirect('trainer_login')
 
     member_count = Member.objects.filter(
-        trainer=trainer
-    ).count()
+        trainer=trainer).count()
 
     workout_count = Workout.objects.filter(
-        trainer=trainer
-    ).count()
+        trainer=trainer).count()
 
     diet_count = Diet.objects.filter(
-        trainer=trainer
-    ).count()
+        trainer=trainer).count()
+
+    recent_workouts = (
+        Workout.objects
+        .filter(trainer=trainer)
+        .select_related('member', 'member__user')
+        .order_by('-date', '-id')[:5]
+    )
+
+    recent_diets = (
+        Diet.objects
+        .filter(trainer=trainer)
+        .select_related('member', 'member__user')
+        .order_by('-date', '-id')[:5]
+    )
 
     context = {
         'trainer': trainer,
         'member_count': member_count,
         'workout_count': workout_count,
         'diet_count': diet_count,
+        'recent_workouts': recent_workouts,
+        'recent_diets': recent_diets,
     }
 
     return render(
