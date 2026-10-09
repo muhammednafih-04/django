@@ -135,6 +135,15 @@ body {
     padding: 30px;
     border-radius: 12px;
 }
+.welcome {
+    overflow-x: auto;
+}
+
+table {
+    min-width: 650px;
+    text-align: center;
+    border-color: #000000;
+}
 
 .welcome h1 {
     color: #000000;
@@ -277,34 +286,12 @@ body {
     <div class="welcome">
 
         <h2>Admin Management</h2>
-
         <p>
             Admin can manage trainers, users, workouts
             and diet information from this system.
         </p>
-
-        <div class="buttons">
-
-            <a href="/admin/gym/trainer/">
-                Manage Trainers
-            </a>
-
-            <a href="/admin/gym/member/">
-                Manage Users
-            </a>
-
-            <a href="/admin/gym/workout/">
-                Manage Workouts
-            </a>
-
-            <a href="/admin/gym/diet/">
-                Manage Diets
-            </a>
-        </div>
-    </div>
-</div>
-
-<h2>Recent Workouts</h2>
+        
+<h3>Recent Workouts</h3><br>
 
 <table>
 
@@ -343,6 +330,27 @@ body {
     </tbody>
 
 </table>
+
+        <div class="buttons">
+
+            <a href="/admin/gym/trainer/">
+                Manage Trainers
+            </a>
+
+            <a href="/admin/gym/member/">
+                Manage Users
+            </a>
+
+            <a href="/admin/gym/workout/">
+                Manage Workouts
+            </a>
+
+            <a href="/admin/gym/diet/">
+                Manage Diets
+            </a>
+        </div>
+    </div>
+</div>
 
 </div>
 

@@ -58,15 +58,16 @@ class WorkoutViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+         # Admin can view all workout records
+        if self.request.user.is_staff:
+            return Workout.objects.all()
 
         try:
             trainer = Trainer.objects.get(
                 user=self.request.user
             )
 
-            return Workout.objects.filter(
-                trainer=trainer
-            )
+            return Workout.objects.filter(trainer=trainer)
 
         except Trainer.DoesNotExist:
 
@@ -80,17 +81,16 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 
         member = serializer.validated_data['member']
 
-        # IMPORTANT CHANGE
+        # IMPORTANT
         if member.trainer != trainer:
             raise PermissionDenied(
-                "This member belongs to another trainer."
-            )
+                "This member belongs to another trainer.")
 
         serializer.save(
             trainer=trainer
         )
 
-    # IMPORTANT CHANGE
+    # IMPORTANT
     def perform_update(self, serializer):
 
         trainer = Trainer.objects.get(
@@ -102,7 +102,7 @@ class WorkoutViewSet(viewsets.ModelViewSet):
             serializer.instance.member
         )
 
-        # IMPORTANT CHANGE
+        # IMPORTANT
         if member.trainer != trainer:
             raise PermissionDenied(
                 "This member belongs to another trainer."
@@ -150,7 +150,7 @@ class DietViewSet(viewsets.ModelViewSet):
             trainer=trainer
         )
 
-    # IMPORTANT CHANGE
+    # IMPORTANT
     def perform_update(self, serializer):
 
         trainer = Trainer.objects.get(
@@ -170,8 +170,8 @@ class DietViewSet(viewsets.ModelViewSet):
         serializer.save(
             trainer=trainer
         )
-#-----login------#
 
+#-----login------#
 def admin_login(request):
 
     if request.method == 'POST':
