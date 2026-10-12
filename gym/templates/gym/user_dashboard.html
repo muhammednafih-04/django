@@ -19,6 +19,7 @@
             background-size:cover;
             background-attachment: scroll;
             min-height: 100vh;
+            background-position: center;
         }
         body h1{
             text-align: center;
@@ -473,7 +474,8 @@
         {% endif %}
 
         {% if trainer.email %}
-        <a href="mailto:{{ trainer.email }}" class="contact-btn email-btn">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ trainer.email }}" target="_blank" 
+        rel="noopener noreferrer"  class="contact-btn email-btn">
             Email Trainer
         </a>
         {% endif %}
