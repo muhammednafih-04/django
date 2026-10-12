@@ -77,7 +77,7 @@
     color: #111827;
     }
 
-        .logout {
+    .logout {
             background: #dc2626;
             color: white;
             padding: 10px 18px;
@@ -85,7 +85,7 @@
             border-radius: 7px;
         }
 
-        .logout:hover {
+    .logout:hover {
             background: #0a0a0a;
         }
 
@@ -106,8 +106,7 @@
             border-collapse: collapse;
         }
 
-        th,
-        td {
+        th,td {
             padding: 12px;
             border-bottom: 1px solid #ddd;
             text-align: left;
@@ -138,7 +137,7 @@
     margin-top: 20px;
 }
 .welcome-bmi-box{
-    background-color: #ddd;
+    background-color: #ffffff;
     background-size: auto;
     border-radius:10px;
     margin:60px;
@@ -188,6 +187,75 @@
     margin-bottom: 5px;
 }
 
+/* Contact Trainer Card */
+.contact-trainer {
+    border-left: 5px solid #e21212;
+}
+
+.welcome-contact-trainer{
+    background-color: #ddd;
+    padding: 20px;
+    border-radius: 40px;
+    margin-bottom: 25px;
+    justify-content: center;
+    margin-top: 200px;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.trainer-details {
+    margin-top: 18px;
+    line-height: 1.9;
+}
+
+.trainer-details p {
+    margin: 6px 0;
+    color: #333;
+    overflow-wrap: anywhere;
+}
+
+.contact-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.contact-btn {
+    display: inline-block;
+    padding: 12px 18px;
+    background: #e21212;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.contact-btn:hover {
+    background: #111;
+    color: #fff;
+}
+
+.whatsapp-btn {
+    background: #218c4a;
+}
+
+.email-btn {
+    background: #333;
+}
+
+@media (max-width: 700px) {
+    .contact-buttons {
+        flex-direction: column;
+    }
+
+    .contact-btn {
+        width: 100%;
+    }
+}
+
     </style>
 </head>
 
@@ -218,7 +286,6 @@
 
     <!-- WORKOUTS -->
     <div class="section">
-
         <h2>My Workouts</h2>
 
         {% if workouts %}
@@ -381,6 +448,36 @@
                 "<p>Status: " + status + "</p>";
         }
         </script>
+</div>
+<!-- Contact Trainer -->
+<div class="welcome-contact-trainer">
+    <h2>Contact Your Trainer</h2>
+    <p>Need help with your workouts or diet plan? Contact your assigned trainer.</p>
+
+    <div class="trainer-details">
+        <p><strong>Name:</strong> {{ trainer.name }}</p>
+        <p><strong>Specialization:</strong> {{ trainer.specialization }}</p>
+        <p><strong>Phone:</strong> {{ trainer.phone }}</p>
+        <p><strong>Email:</strong> {{ trainer.email }}</p>
+    </div>
+
+    <div class="contact-buttons">
+        {% if trainer.phone %}
+        <a href="tel:{{ trainer.phone }}" class="contact-btn">
+            Call Trainer
+        </a>
+        <a href="https://wa.me/{{ trainer.phone }}" target="_blank"
+           rel="noopener noreferrer" class="contact-btn whatsapp-btn">
+            WhatsApp
+        </a>
+        {% endif %}
+
+        {% if trainer.email %}
+        <a href="mailto:{{ trainer.email }}" class="contact-btn email-btn">
+            Email Trainer
+        </a>
+        {% endif %}
+    </div>
 </div>
 </body>
 </html>
