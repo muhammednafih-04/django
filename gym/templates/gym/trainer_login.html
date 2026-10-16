@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <title>Trainer Login</title>
 
@@ -16,11 +17,9 @@
         body {
             font-family: Arial, sans-serif;
             min-height: 100vh;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             background: linear-gradient(
                 135deg,
                 #111827,
@@ -81,10 +80,15 @@
             border-radius: 7px;
             font-size: 16px;
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            transition: 0.3s;
         }
 
         .login-btn:hover {
             background: #111113;
+            transform: translateY(-4px);
+    
         }
 
         .error {
@@ -141,12 +145,10 @@
                     placeholder="Enter password"
                     required>
       </div>
-
-            <button
+            <button 
                 type="submit"
                 class="login-btn">
-                   Login
-            </button>
+                  Login
    </form>
     </div>
 
